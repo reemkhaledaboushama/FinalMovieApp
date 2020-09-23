@@ -9,6 +9,7 @@
 ">
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
+app:itemIconTint="@color/transparent"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:layout_marginTop="100dp"

@@ -16,4 +16,8 @@ class FavoritesFragment : Fragment() {
     ): View? {
         return inflater.inflate(R.layout.favorites_fragment, container, false)
     }
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+    }
+
 }

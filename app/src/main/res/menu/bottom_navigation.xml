@@ -6,15 +6,20 @@
     android:id="@+id/top_rated"
     android:title="@string/top_rated"
     android:icon="@drawable/top_rated"
+
     />
 
     <item
         android:id="@+id/favorite"
+
         android:title="@string/favorites"
-        android:icon="@drawable/favorite"/>
+        android:icon="@drawable/favorite"
+        />
 
     <item
         android:id="@+id/popular"
         android:title="@string/popular"
-        android:icon="@drawable/popular"/>
+        android:icon="@drawable/popular"
+
+       />
 </menu>

@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.reem.android.finalmovieapp.R
-
 import com.reem.android.finalmovieapp.data.repository.MoviesRepository
 import com.reem.android.finalmovieapp.ui.movie.FavoritesFragment
 import com.reem.android.finalmovieapp.ui.movie.PopularFragment

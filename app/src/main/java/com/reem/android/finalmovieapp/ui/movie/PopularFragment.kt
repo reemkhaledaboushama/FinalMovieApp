@@ -9,22 +9,22 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.reem.android.finalmovieapp.R
 import com.reem.android.finalmovieapp.data.models.ui.Movie
+import com.reem.android.finalmovieapp.viewmodels.PopularMoviesViewModel
 import com.squareup.picasso.Picasso
 
-class PopularFragment : Fragment() {
+class PopularFragment() : Fragment() {
 
+   private val popularMoviesViewModel: PopularMoviesViewModel by viewModels()
     private lateinit var generalView: View
     private lateinit var popularMoviesRecyclerView: RecyclerView
+    private lateinit var popularMoviesAdapter: MoviesAdapter
 
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -38,8 +38,12 @@ class PopularFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         popularMoviesRecyclerView = view.findViewById(R.id.movies_recycler_view)
-
         popularMoviesRecyclerView.layoutManager=LinearLayoutManager(context)
+
+        popularMoviesViewModel.popularMoviesLiveData.observe(viewLifecycleOwner, Observer {
+            popularMoviesAdapter= MoviesAdapter((it.shuffled()))
+            popularMoviesRecyclerView.adapter=popularMoviesAdapter
+        })
     }
 
     class MoviesAdapter (private val movies: List<Movie>) :

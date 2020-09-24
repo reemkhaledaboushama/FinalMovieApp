@@ -3,19 +3,19 @@ package com.reem.android.finalmovieapp.data.models.ui
 import com.google.gson.annotations.SerializedName
 
 data class Movie(
-    @SerializedName("id")
-    val id: Long,
-    @SerializedName("title")
-    val title: String,
-    @SerializedName("overview")
-    val overview: String,
-    @SerializedName("poster_path")
-    val posterPath: String,
-    @SerializedName("backdrop_path")
-    val backdropPath: String,
-    @SerializedName("vote_average")
-    val rating: Float,
-    @SerializedName("release_date")
-    val releaseDate: String
+    val popularity:Double,
+    val vote_count:Int ,
+    val video:Boolean ,
+    val poster_path:String,
+    val id:Int,
+    val adult:Boolean ,
+    val backdrop_path:String ,
+    val original_language:String,
+    val original_title:String ,
+    val genre_ids:List<Int> ,
+    val title:String ,
+    val vote_average:Double ,
+    val overview:String ,
+    val release_date:String
 )
 

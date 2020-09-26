@@ -58,7 +58,7 @@ object MoviesRepository {
 
     fun getTopRatedMovies(
         page: Int = 1,
-        onSuccess: (movies: List<com.reem.android.finalmovieapp.data.models.remote.Movie>) -> Unit,
+        onSuccess: (movies: List<Movie>) -> Unit,
         onError: () -> Unit
     ) {
         api.getTopRatedMovies(page = page)

@@ -15,9 +15,10 @@
         app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
         tools:layout_editor_absoluteX="-16dp" />
 
-    <fragment
+  <!--  <fragment
 
         android:id="@+id/my_nav_host_fragment"
+        android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
@@ -31,7 +32,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
         />
-
+-->
 
 
 
@@ -55,7 +56,8 @@ app:labelVisibilityMode="auto"
         app:menu="@menu/bottom_navigation" />
 
 
-    <!--<androidx.recyclerview.widget.RecyclerView
+<!--
+    <androidx.recyclerview.widget.RecyclerView
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -67,5 +69,4 @@ app:labelVisibilityMode="auto"
         android:clipToPadding="false"
 
         />-->
-
 </androidx.constraintlayout.widget.ConstraintLayout>

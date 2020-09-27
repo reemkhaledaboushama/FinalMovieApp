@@ -6,11 +6,9 @@ import com.reem.android.finalmovieapp.data.models.remote.GetMoviesResponse
 import android.util.Log
 import com.reem.android.finalmovieapp.data.models.ui.Movie
 import com.reem.android.finalmovieapp.data.network.ApiServices
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+
 
 class MoviesRepository {
 

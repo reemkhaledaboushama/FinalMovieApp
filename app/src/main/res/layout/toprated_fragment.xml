@@ -1,39 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/toprated_movies"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:background="#252a2b"
-    android:id="@+id/top_rated_fragment"
-
+    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+    android:layout_marginTop="8dp"
+    android:clipToPadding="false"
+    android:paddingStart="16dp"
+    android:paddingEnd="16dp"
     >
-   <!-- <TextView
+
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Trending Movies"
-        android:textColor="#ffffff"
+        android:layout_marginTop="16dp"
+        android:text="@string/top_rated"
+        android:textColor="@android:color/white"
+        android:textSize="25sp"
         android:textStyle="bold"
-        android:textSize="50dp"
-        android:textAlignment="center"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"/>-->
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        android:layout_marginBottom="5dp"/>
+
+
+    <TextView
+        android:textStyle="bold"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/top_rated_movies"
+        android:textColor="@android:color/white"
+        tools:layout_editor_absoluteX="32dp"
+        tools:layout_editor_absoluteY="40dp"
+        android:textSize="18sp"
+        android:layout_marginBottom="10dp"/>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/top_rated_movies"
 
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
+        android:id="@+id/recycle_toprated_movies"
 
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:listitem="@layout/toprated_fragment"
-        />
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipToPadding="false"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:textColor="@android:color/white"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="89dp" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>

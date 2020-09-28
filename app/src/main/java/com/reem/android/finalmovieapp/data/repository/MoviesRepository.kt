@@ -59,8 +59,8 @@ object MoviesRepository {
     }
 
 
-    fun getTopRatedMovies(page: Int = 1):LiveData<List<Movie>> {
-        val moviesListLiveData: MutableLiveData<List<Movie>> = MutableLiveData()
+    fun getTopRatedMovies(page: Int = 1):LiveData<MutableList<Movie>> {
+        val moviesListLiveData: MutableLiveData<MutableList<Movie>> = MutableLiveData()
 
         api.getTopRatedMovies(page = page)
             .enqueue(object : Callback<GetMoviesResponse> {

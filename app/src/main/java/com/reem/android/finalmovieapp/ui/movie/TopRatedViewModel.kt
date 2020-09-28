@@ -6,12 +6,9 @@ import androidx.lifecycle.LiveData
 import com.reem.android.finalmovieapp.data.models.ui.Movie
 import com.reem.android.finalmovieapp.data.repository.MoviesRepository
 
-class PopularViewModel(application: Application) : AndroidViewModel(application) {
+class TopRatedViewModel(application: Application) : AndroidViewModel(application) {
 
-
-    fun getPopularMovies(): LiveData<MutableList<Movie>> {
-        return MoviesRepository.getPopularMovies()
+    fun getTopRatedMovies(): LiveData<MutableList<Movie>> {
+        return MoviesRepository.getTopRatedMovies()
     }
-
-
 }

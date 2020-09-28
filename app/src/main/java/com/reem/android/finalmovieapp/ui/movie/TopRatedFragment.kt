@@ -52,14 +52,9 @@ class TopRatedFragment: Fragment(){
     }
 
     private fun getTopRatedMovies() {
-        fun onError() {
-
-        }
         MoviesRepository.getTopRatedMovies(
-            topRatedMoviesPage,
-            ::onTopRatedMoviesFetched,
-            ::onError
-        )
+            topRatedMoviesPage )
+        attachTopRatedMoviesOnScrollListener()
     }
 
     private fun attachTopRatedMoviesOnScrollListener() {

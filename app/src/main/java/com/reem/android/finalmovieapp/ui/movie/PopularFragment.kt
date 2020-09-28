@@ -12,6 +12,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -25,6 +27,8 @@ import kotlinx.android.synthetic.main.popular_fragment.*
 
 class PopularFragment: Fragment() {
 
+    private val mainViewModel: PopularViewModel by viewModels()
+
     private lateinit var popularMovies: RecyclerView
     private lateinit var popularMoviesAdapter: MoviesAdapter
     private lateinit var popularMoviesLayoutMgr: LinearLayoutManager
@@ -36,9 +40,12 @@ class PopularFragment: Fragment() {
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
 
-
+        mainViewModel.getPopularMovies().observe(viewLifecycleOwner, Observer {
+            recycle_popular_movies.adapter = MoviesAdapter(it) { movie -> showMovieDetails(movie) }
+        })
         return inflater.inflate(R.layout.popular_fragment, container, false)
     }
+
 
 
     private fun showMovieDetails(movie: Movie) {
@@ -65,20 +72,17 @@ class PopularFragment: Fragment() {
 
     private fun getPopularMovies() {
         MoviesRepository.getPopularMovies(
-            popularMoviesPage,
-            ::onPopularMoviesFetched,
-            ::onError
-        )
-    }
-
-    private fun onPopularMoviesFetched(movies: List<Movie>) {
-        popularMoviesAdapter.appendMovies(movies)
+            popularMoviesPage)
         attachPopularMoviesOnScrollListener()
     }
 
-    private fun onError() {
-        Toast.makeText(this.context, getString(R.string.error_fetch_movies), Toast.LENGTH_SHORT).show()
-    }
+//    private fun onPopularMoviesFetched(movies: List<Movie>) {
+//        attachPopularMoviesOnScrollListener()
+//    }
+//
+//    private fun onError() {
+//        Toast.makeText(this.context, getString(R.string.error_fetch_movies), Toast.LENGTH_SHORT).show()
+//    }
 
     private fun attachPopularMoviesOnScrollListener() {
         popularMovies.addOnScrollListener(object : RecyclerView.OnScrollListener() {

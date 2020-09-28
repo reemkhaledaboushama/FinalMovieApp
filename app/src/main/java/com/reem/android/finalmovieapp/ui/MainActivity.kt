@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity() {
         val popularfragment = PopularFragment()
         val topratedfragment = TopRatedFragment()
 
-        setCurrentFragment(topratedfragment)
+        setCurrentFragment(popularfragment)
 
 
         bottom_navigation.setOnNavigationItemSelectedListener {

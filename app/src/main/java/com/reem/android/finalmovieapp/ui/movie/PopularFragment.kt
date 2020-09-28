@@ -28,7 +28,6 @@ class PopularFragment: Fragment() {
     private lateinit var popularMovies: RecyclerView
     private lateinit var popularMoviesAdapter: MoviesAdapter
     private lateinit var popularMoviesLayoutMgr: LinearLayoutManager
-    private lateinit var popularMovieGrid: GridLayoutManager
     private var popularMoviesPage = 1
 
 
@@ -56,12 +55,7 @@ class PopularFragment: Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         popularMovies = recycle_popular_movies
-      popularMovieGrid = GridLayoutManager(this.context, 2)
-        popularMoviesLayoutMgr = LinearLayoutManager(
-            this.context,
-            LinearLayoutManager.VERTICAL,
-            false
-        )
+        popularMoviesLayoutMgr = GridLayoutManager(this.context, 2)
         popularMovies.layoutManager = popularMoviesLayoutMgr
         popularMoviesAdapter = MoviesAdapter(mutableListOf()) { movie -> showMovieDetails(movie) }
         println(popularMoviesAdapter)

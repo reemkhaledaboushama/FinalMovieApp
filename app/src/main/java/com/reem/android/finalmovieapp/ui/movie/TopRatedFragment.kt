@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.reem.android.finalmovieapp.R
@@ -42,11 +43,7 @@ class TopRatedFragment: Fragment(){
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         topRatedMovies = recycle_toprated_movies
-        topRatedMoviesLayoutMgr = LinearLayoutManager(
-            this.context,
-            LinearLayoutManager.VERTICAL,
-            false
-        )
+        topRatedMoviesLayoutMgr = GridLayoutManager(this.context, 2)
         topRatedMovies.layoutManager = topRatedMoviesLayoutMgr
         topRatedMoviesAdapter = MoviesAdapter(mutableListOf()) { movie -> showMovieDetails(movie) }
         println(topRatedMoviesAdapter)

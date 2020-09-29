@@ -13,6 +13,7 @@ import com.reem.android.finalmovieapp.data.models.ui.MovieT
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun getMoviesDao(): MovieDao
+    abstract fun getMoviesTDao():MovieTDao
 
     companion object {
         @Volatile

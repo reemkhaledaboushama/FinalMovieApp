@@ -41,7 +41,7 @@ class TopRatedFragment: Fragment(){
     }
 
     private fun showMovieDetails(movie: MovieT) {
-        val intent = Intent(this.activity, MovieDetailsActivity::class.java)
+        val intent = Intent(this.context, MovieDetailsActivity::class.java)
         intent.putExtra(MOVIE_BACKDROP, movie.backdropPath)
         intent.putExtra(MOVIE_POSTER, movie.posterPath)
         intent.putExtra(MOVIE_TITLE, movie.title)
@@ -53,7 +53,7 @@ class TopRatedFragment: Fragment(){
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         topRatedMovies = recycle_toprated_movies
-        topRatedMoviesLayoutMgr = GridLayoutManager(this.activity, 2)
+        topRatedMoviesLayoutMgr = GridLayoutManager(this.context, 2)
         topRatedMovies.layoutManager = topRatedMoviesLayoutMgr
         topRatedMoviesAdapter = MoviesAdapterT(mutableListOf()) { movie -> showMovieDetails(movie) }
         println(topRatedMoviesAdapter)

@@ -9,6 +9,11 @@ import com.reem.android.finalmovieapp.data.repository.MoviesRepository
 class PopularViewModel(application: Application) : AndroidViewModel(application) {
 
 
+
+    init {
+        MoviesRepository.createDatabase(application)
+    }
+
     fun getPopularMovies(): LiveData<MutableList<Movie>> {
         return MoviesRepository.getPopularMovies()
     }

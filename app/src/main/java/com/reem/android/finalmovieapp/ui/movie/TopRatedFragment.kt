@@ -14,8 +14,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.reem.android.finalmovieapp.R
 import com.reem.android.finalmovieapp.data.models.remote.*
 import com.reem.android.finalmovieapp.data.models.ui.Movie
+import com.reem.android.finalmovieapp.data.models.ui.MovieT
 import com.reem.android.finalmovieapp.data.repository.MoviesRepository
 import com.reem.android.finalmovieapp.ui.MoviesAdapter
+import com.reem.android.finalmovieapp.ui.MoviesAdapterT
 import com.reem.android.finalmovieapp.ui.movie.popular.PopularViewModel
 import kotlinx.android.synthetic.main.toprated_fragment.*
 
@@ -24,7 +26,7 @@ class TopRatedFragment: Fragment(){
     private val mainViewModel: TopRatedViewModel by viewModels()
 
     private lateinit var topRatedMovies: RecyclerView
-    private lateinit var topRatedMoviesAdapter: MoviesAdapter
+    private lateinit var topRatedMoviesAdapter: MoviesAdapterT
     private lateinit var topRatedMoviesLayoutMgr: LinearLayoutManager
 
     private var topRatedMoviesPage = 1
@@ -33,13 +35,13 @@ class TopRatedFragment: Fragment(){
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         mainViewModel.getTopRatedMovies().observe(viewLifecycleOwner, Observer {
-            recycle_toprated_movies.adapter = MoviesAdapter(it) { movie -> showMovieDetails(movie) }
+            recycle_toprated_movies.adapter = MoviesAdapterT(it) { movie -> showMovieDetails(movie) }
         })
         return inflater.inflate(R.layout.toprated_fragment, container, false)
     }
 
-    private fun showMovieDetails(movie: Movie) {
-        val intent = Intent(this.context, MovieDetailsActivity::class.java)
+    private fun showMovieDetails(movie: MovieT) {
+        val intent = Intent(this.activity, MovieDetailsActivity::class.java)
         intent.putExtra(MOVIE_BACKDROP, movie.backdropPath)
         intent.putExtra(MOVIE_POSTER, movie.posterPath)
         intent.putExtra(MOVIE_TITLE, movie.title)
@@ -51,11 +53,12 @@ class TopRatedFragment: Fragment(){
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         topRatedMovies = recycle_toprated_movies
-        topRatedMoviesLayoutMgr = GridLayoutManager(this.context, 2)
+        topRatedMoviesLayoutMgr = GridLayoutManager(this.activity, 2)
         topRatedMovies.layoutManager = topRatedMoviesLayoutMgr
-        topRatedMoviesAdapter = MoviesAdapter(mutableListOf()) { movie -> showMovieDetails(movie) }
+        topRatedMoviesAdapter = MoviesAdapterT(mutableListOf()) { movie -> showMovieDetails(movie) }
         println(topRatedMoviesAdapter)
         topRatedMovies.adapter = topRatedMoviesAdapter
+        topRatedMoviesAdapter.notifyDataSetChanged()
         getTopRatedMovies()
     }
 

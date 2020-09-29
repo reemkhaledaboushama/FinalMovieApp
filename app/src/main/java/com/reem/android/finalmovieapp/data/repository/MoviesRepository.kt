@@ -97,8 +97,9 @@ object MoviesRepository {
                         val remoteMoviesList: List<MovieT> =
                             response.body()?.movies ?: listOf()
                         topRatedMoviesList.addAll(remoteMoviesList)
-                        dataBase.getMoviesDao().insertAllT(topRatedMoviesList)
+                        dataBase.getMoviesTDao().insertAllT(topRatedMoviesList)
                         moviesListLiveData.postValue(topRatedMoviesList)
+
                     }
                 }
 
@@ -114,7 +115,7 @@ object MoviesRepository {
     }
 
     private fun getLocalMoviesT(): List<MovieT> {
-        return dataBase.getMoviesDao().getAllMoviesT()
+        return dataBase.getMoviesTDao().getAllMoviesT()
     }
 
     fun createDatabase(context: Context) {

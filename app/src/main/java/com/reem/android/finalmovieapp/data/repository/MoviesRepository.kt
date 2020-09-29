@@ -8,7 +8,9 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.reem.android.finalmovieapp.data.database.AppDatabase
+import com.reem.android.finalmovieapp.data.models.remote.GetMoviesResponseT
 import com.reem.android.finalmovieapp.data.models.ui.Movie
+import com.reem.android.finalmovieapp.data.models.ui.MovieT
 import com.reem.android.finalmovieapp.data.network.ApiServices
 import retrofit2.Call
 import retrofit2.Callback
@@ -22,7 +24,7 @@ object MoviesRepository {
     private val tag: String = MoviesRepository::class.java.simpleName
 
     private val popularMoviesList: MutableList<Movie> = mutableListOf()
-    private val topRatedMoviesList: MutableList<Movie> = mutableListOf()
+    private val topRatedMoviesList: MutableList<MovieT> = mutableListOf()
     private lateinit var dataBase: AppDatabase
 
 
@@ -74,24 +76,32 @@ object MoviesRepository {
     }
 
 
-    fun getTopRatedMovies(page: Int = 1):LiveData<MutableList<Movie>> {
-        val moviesListLiveData: MutableLiveData<MutableList<Movie>> = MutableLiveData()
+    fun getTopRatedMovies(page: Int=1):LiveData<MutableList<MovieT>> {
+        val moviesListLiveData: MutableLiveData<MutableList<MovieT>> = MutableLiveData()
 
+        if (topRatedMoviesList.size > 0) {
+            moviesListLiveData.postValue(topRatedMoviesList)
+            return moviesListLiveData
+        }else if (getLocalMoviesT().isNotEmpty()) {
+            topRatedMoviesList.addAll(getLocalMoviesT())
+            moviesListLiveData.postValue(topRatedMoviesList)
+        }
         api.getTopRatedMovies(page = page)
-            .enqueue(object : Callback<GetMoviesResponse> {
+            .enqueue(object : Callback<GetMoviesResponseT> {
                 override fun onResponse(
-                    call: Call<GetMoviesResponse>,
-                    response: Response<GetMoviesResponse>
+                    call: Call<GetMoviesResponseT>,
+                    response: Response<GetMoviesResponseT>
                 ) {
                     if (response.isSuccessful) {
-                        val remoteMoviesList: List<Movie> = response.body()?.movies ?: listOf()
+                        val remoteMoviesList: List<MovieT> =
+                            response.body()?.movies ?: listOf()
                         topRatedMoviesList.addAll(remoteMoviesList)
+                        dataBase.getMoviesDao().insertAllT(topRatedMoviesList)
                         moviesListLiveData.postValue(topRatedMoviesList)
                     }
                 }
 
-                override fun onFailure(call: Call<GetMoviesResponse>, t: Throwable) {
-                    Log.e(tag, t.message.toString())
+                override fun onFailure(call: Call<GetMoviesResponseT>, t: Throwable) {
                 }
             })
         return moviesListLiveData
@@ -102,6 +112,9 @@ object MoviesRepository {
         return dataBase.getMoviesDao().getAllMovies()
     }
 
+    private fun getLocalMoviesT(): List<MovieT> {
+        return dataBase.getMoviesDao().getAllMoviesT()
+    }
 
     fun createDatabase(context: Context) {
         dataBase = AppDatabase.getDatabase(context)

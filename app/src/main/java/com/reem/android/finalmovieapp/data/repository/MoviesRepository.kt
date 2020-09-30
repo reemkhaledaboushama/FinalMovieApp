@@ -34,7 +34,7 @@ object MoviesRepository {
     }
 
 
-    fun getPopularMovies(page: Int = 1): LiveData<MutableList<Movie>> {
+    fun getPopularMovies(page: Int=1): LiveData<MutableList<Movie>> {
 
         val moviesListLiveData: MutableLiveData<MutableList<Movie>> = MutableLiveData()
 
@@ -59,7 +59,7 @@ object MoviesRepository {
     }
 
 
-    fun getTopRatedMovies(page: Int = 1):LiveData<MutableList<Movie>> {
+    fun getTopRatedMovies(page: Int=1):LiveData<MutableList<Movie>> {
         val moviesListLiveData: MutableLiveData<MutableList<Movie>> = MutableLiveData()
 
         api.getTopRatedMovies(page = page)

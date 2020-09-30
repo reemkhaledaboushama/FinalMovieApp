@@ -4,16 +4,18 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.reem.android.finalmovieapp.data.models.ui.FavMovie
 import com.reem.android.finalmovieapp.data.models.ui.Movie
 import com.reem.android.finalmovieapp.data.models.ui.MovieT
 
 
-@Database(entities = [Movie::class, MovieT::class], version = 1, exportSchema = false)
+@Database(entities = [Movie::class, MovieT::class, FavMovie::class], version = 1, exportSchema = false)
 
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun getMoviesDao(): MovieDao
     abstract fun getMoviesTDao():MovieTDao
+    abstract fun getFavMoviesDao(): FavMovieDao
 
     companion object {
         @Volatile

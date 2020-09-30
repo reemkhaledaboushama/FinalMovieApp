@@ -5,6 +5,7 @@ import com.reem.android.finalmovieapp.data.models.remote.GetMoviesResponse
 
 
 import android.util.Log
+import android.widget.ImageView
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.reem.android.finalmovieapp.data.database.AppDatabase
@@ -20,14 +21,14 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object MoviesRepository {
 
-    private val api: ApiServices
+    val api: ApiServices
     private val tag: String = MoviesRepository::class.java.simpleName
 
     private val popularMoviesList: MutableList<Movie> = mutableListOf()
     private val topRatedMoviesList: MutableList<MovieT> = mutableListOf()
-    private lateinit var dataBase: AppDatabase
+    lateinit var dataBase: AppDatabase
 
-
+    private lateinit var favbtn: ImageView
 
 
     init {
@@ -37,6 +38,7 @@ object MoviesRepository {
             .build()
 
         api = retrofit.create(ApiServices::class.java)
+
     }
 
 
@@ -45,14 +47,13 @@ object MoviesRepository {
         val moviesListLiveData: MutableLiveData<MutableList<Movie>> = MutableLiveData()
 
 
-        if (popularMoviesList.size > 0) {
-            moviesListLiveData.postValue(popularMoviesList)
-            return moviesListLiveData
-        }
-        else if (getLocalMovies().isNotEmpty()) {
-            popularMoviesList.addAll(getLocalMovies())
-            moviesListLiveData.postValue(popularMoviesList)
-        }
+        /* if (popularMoviesList.size > 0) {
+             moviesListLiveData.postValue(popularMoviesList)
+             return moviesListLiveData
+         } else if (getLocalMovies().isNotEmpty()) {
+             popularMoviesList.addAll(getLocalMovies())
+             moviesListLiveData.postValue(popularMoviesList)
+         }*/
 
 
         api.getPopularMovies(page = page)
@@ -64,7 +65,7 @@ object MoviesRepository {
                     if (response.isSuccessful) {
                         val remoteMoviesList: List<Movie> = response.body()?.movies ?: listOf()
                         popularMoviesList.addAll(remoteMoviesList)
-                        dataBase.getMoviesDao().insertAll(popularMoviesList)
+                        //dataBase.getMoviesDao().insertAll(popularMoviesList)
                         moviesListLiveData.postValue(popularMoviesList)
                     }
                 }
@@ -77,13 +78,13 @@ object MoviesRepository {
     }
 
 
-    fun getTopRatedMovies(page: Int=1):LiveData<MutableList<MovieT>> {
+    fun getTopRatedMovies(page: Int = 1): LiveData<MutableList<MovieT>> {
         val moviesListLiveData: MutableLiveData<MutableList<MovieT>> = MutableLiveData()
 
         if (topRatedMoviesList.size > 0) {
             moviesListLiveData.postValue(topRatedMoviesList)
             return moviesListLiveData
-        }else if (getLocalMoviesT().isNotEmpty()) {
+        } else if (getLocalMoviesT().isNotEmpty()) {
             topRatedMoviesList.addAll(getLocalMoviesT())
             moviesListLiveData.postValue(topRatedMoviesList)
         }
@@ -109,6 +110,16 @@ object MoviesRepository {
         return moviesListLiveData
 
     }
+/*
+    fun getFavoriteMoviess(page: Int=1):FavMovie {
+       lateinit var fav_movie: FavMovie
+
+
+        return FavMovie()
+
+    }
+*/
+
 
     private fun getLocalMovies(): List<Movie> {
         return dataBase.getMoviesDao().getAllMovies()
@@ -121,6 +132,11 @@ object MoviesRepository {
     fun createDatabase(context: Context) {
         dataBase = AppDatabase.getDatabase(context)
     }
+    /* fun getFavoriteMovies(): MutableList<FavMovie> {
+         return dataBase.getFavMoviesDao().getAllMovies()
 
-    }
+     }*/
+}
+
+
 

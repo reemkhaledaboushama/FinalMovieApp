@@ -15,32 +15,32 @@
         app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
         tools:layout_editor_absoluteX="-16dp" />
 
-  <!--  <fragment
+    <!--  <fragment
 
-        android:id="@+id/my_nav_host_fragment"
-        android:name="androidx.navigation.fragment.NavHostFragment"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        app:defaultNavHost="true"
-        app:navGraph="@navigation/mobile_navigation"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf = "@+id/bottom_navigation"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
-        />
--->
+          android:id="@+id/my_nav_host_fragment"
+          android:name="androidx.navigation.fragment.NavHostFragment"
+          android:layout_width="match_parent"
+          android:layout_height="0dp"
+          android:layout_weight="1"
+          app:defaultNavHost="true"
+          app:navGraph="@navigation/mobile_navigation"
+          android:layout_marginBottom="8dp"
+          app:layout_constraintBottom_toTopOf = "@+id/bottom_navigation"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintHorizontal_bias="0.0"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent"
+          app:layout_constraintVertical_bias="1.0"
+          />
+  -->
 
 
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
         app:itemIconTint="@drawable/navigator_selector"
-android:background="@drawable/bg_navigation"
-app:labelVisibilityMode="auto"
+        android:background="@drawable/bg_navigation"
+        app:labelVisibilityMode="auto"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:layout_marginTop="100dp"
@@ -56,17 +56,17 @@ app:labelVisibilityMode="auto"
         app:menu="@menu/bottom_navigation" />
 
 
-<!--
-    <androidx.recyclerview.widget.RecyclerView
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:id="@+id/popular_movies"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+    <!--
+        <androidx.recyclerview.widget.RecyclerView
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:id="@+id/popular_movies"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
 
-        android:clipToPadding="false"
+            android:clipToPadding="false"
 
-        />-->
+            />-->
 </androidx.constraintlayout.widget.ConstraintLayout>
